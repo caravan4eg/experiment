@@ -8,8 +8,10 @@ from django.db.models import Q
 
 # TODO поиск по любому слову вводится в форме на странице
 # TODO поиск по списку слов
-# TODO выбор списка слов согласно категории
-# TODO список слов из БД
+# TODO выбор категории из запроса
+# TODO add minus_keywords filter
+# + выбор списка слов согласно категории
+# + список слов из БД
 
 
 class TenderAPIView(generics.ListAPIView):
@@ -24,17 +26,14 @@ class TenderAPIView(generics.ListAPIView):
         minus_keywords =[word.strip() for word in obj.minus_keywords.split(',')]
 
         wanted_items = set()
-        print(plus_keywords)
         
         for word in plus_keywords:
             print('Word in plus_keywords: ', word)
         
-            # for item in Tender.objects.filter(Q(exp_date__gte=date.today())):
             for item in Tender.objects.filter(
                                         Q(exp_date__gte=date.today()),
                                         Q(description__icontains=word)
-                                    ):
-                print('Filtered tender: ', item.pk)
+                                            ):
                 wanted_items.add(item.pk)
             
         return Tender.objects.filter(pk__in=wanted_items)
