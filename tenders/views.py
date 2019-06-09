@@ -65,6 +65,7 @@ class TenderAPIView(generics.ListAPIView):
     def get_queryset(self):
         """
         This view should return a list of all tenders for
+<<<<<<< HEAD
         category as determined by the 
         category_request portion of the URL.
         """
