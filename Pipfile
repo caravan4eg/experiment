@@ -9,6 +9,8 @@ pylint = "*"
 [packages]
 django = "*"
 djangorestframework = "*"
+django-filters = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
